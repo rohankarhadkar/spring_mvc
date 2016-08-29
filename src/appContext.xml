@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<bean name="AudiRepository" class="com.repository.AudiRepository"/>
+	<bean name="SkodaRepository" class="com.repository.SkodaRepository"/>
+	<bean name="LamborghiniRepository" class="com.repository.LamborghiniRepository"/>
+	<bean name="HondaRepository" class="com.repository.HondaRepository"/>
+	
+	<!-- Bean Setter Injection -->
+	<bean name="AudiService" class="com.service.AudiService">
+		<property name="repo" ref="AudiRepository"/>
+	</bean>
+	<!-- Bean Constructor Injection -->
+	<bean name="SkodaService" class="com.service.SkodaService">
+		<constructor-arg index="0" ref="SkodaRepository"/>
+	</bean>
+	<!-- Bean Setter Injection Autowired byType -->
+	<bean name="LamborghiniService" class="com.service.LamborghiniService" autowire="byType"/>
+	<!-- Bean Setter Injection Autowired byName -->
+	<bean name="HondaService" class="com.service.HondaService" autowire="byName"/>
+
+</beans>
